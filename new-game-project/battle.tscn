@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=3 uid="uid://do63bkf5ncslo"]
+
+[ext_resource type="Script" path="res://battle.gd" id="1_bqai8"]
+[ext_resource type="Texture2D" uid="uid://dp8ettrswcx7l" path="res://icon.svg" id="2_cnxwr"]
+
+[node name="battle" type="Node2D"]
+script = ExtResource("1_bqai8")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 639.0
+offset_bottom = 359.0
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI"]
+offset_right = 259.0
+offset_bottom = 128.0
+max_value = 20.0
+value = 20.0
+rounded = true
+texture_progress = ExtResource("2_cnxwr")
+
+[node name="Panel" type="Panel" parent="UI"]
+layout_mode = 0
+offset_left = -2.0
+offset_top = 230.0
+offset_right = 642.0
+offset_bottom = 360.0
+
+[node name="attack" type="Button" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 84.0
+offset_right = 152.0
+offset_bottom = 117.0
+text = "attack"
+
+[node name="Button2" type="Button" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 85.0
+offset_right = 310.0
+offset_bottom = 118.0
+text = "fart"
+
+[node name="Button3" type="Button" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 331.0
+offset_top = 84.0
+offset_right = 471.0
+offset_bottom = 117.0
+text = "fart"
+
+[node name="kys" type="Button" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 81.0
+offset_right = 630.0
+offset_bottom = 114.0
+text = "kys"
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(124, 93)
+texture = ExtResource("2_cnxwr")
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(439, 194)
+texture = ExtResource("2_cnxwr")
+
+[connection signal="button_down" from="UI/Panel/attack" to="." method="_on_button_button_down"]
