@@ -1,8 +1,8 @@
 extends Node2D
 
-var PlayerHP = 20
-var playerDamage = 5
-var enemyHP = 20
+var PlayerHP = 100
+var playerDamage = 25
+var enemyHP = 1000
 var enemyDamage = 2
 var turn = 0
 var enemiesTurn = false
@@ -24,6 +24,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	$UI/Panel/playerChargeBar.value = PlayerCharge
+	$UI/enemyChargeBar.value = enemyCharge
 	if PlayerCharge < 100 and enemyCharge < 100:
 		
 		PlayerCharge += PlayerSpeed * delta
