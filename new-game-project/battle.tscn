@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://do63bkf5ncslo"]
+[gd_scene load_steps=6 format=3 uid="uid://do63bkf5ncslo"]
 
 [ext_resource type="Script" uid="uid://cwyhnadmw1oiv" path="res://battle.gd" id="1_bqai8"]
 [ext_resource type="Texture2D" uid="uid://boxpeiav72v41" path="res://Hpbar.png" id="2_7sfm4"]
 [ext_resource type="Texture2D" uid="uid://dp8ettrswcx7l" path="res://icon.svg" id="2_cnxwr"]
+[ext_resource type="FontFile" uid="uid://dffxvgjbulwpj" path="res://Qdbettercomicsansalternates-z8823.ttf" id="3_i431l"]
+
+[sub_resource type="FontFile" id="FontFile_6t8i5"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
 [node name="battle" type="Node2D"]
 script = ExtResource("1_bqai8")
@@ -37,6 +45,7 @@ offset_left = 9.0
 offset_top = 88.0
 offset_right = 149.0
 offset_bottom = 121.0
+theme_override_fonts/font = ExtResource("3_i431l")
 text = "attack"
 
 [node name="Button2" type="Button" parent="UI/Panel"]
@@ -65,9 +74,9 @@ text = "kys"
 
 [node name="playerHPBar" type="TextureProgressBar" parent="UI/Panel"]
 layout_mode = 0
-offset_left = 331.0
+offset_left = 332.0
 offset_top = 127.0
-offset_right = 459.0
+offset_right = 460.0
 offset_bottom = 159.0
 max_value = 20.0
 value = 20.0
@@ -76,13 +85,33 @@ texture_progress = ExtResource("2_7sfm4")
 
 [node name="playerChargeBar" type="TextureProgressBar" parent="UI/Panel"]
 layout_mode = 0
-offset_left = 495.0
+offset_left = 504.0
 offset_top = 128.0
-offset_right = 623.0
+offset_right = 632.0
 offset_bottom = 160.0
 value = 20.0
 rounded = true
 texture_progress = ExtResource("2_7sfm4")
+tint_over = Color(0.9796547, 0.74454045, 0.9658639, 1)
+tint_progress = Color(0.42181668, 0.6514035, 0.85754997, 1)
+
+[node name="Label" type="Label" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 281.0
+offset_top = 134.0
+offset_right = 321.0
+offset_bottom = 157.0
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "HP"
+
+[node name="Label2" type="Label" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 473.0
+offset_top = 133.0
+offset_right = 500.0
+offset_bottom = 156.0
+theme_override_fonts/font = SubResource("FontFile_6t8i5")
+text = "CD"
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(300, 86)
