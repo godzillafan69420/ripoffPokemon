@@ -14,7 +14,7 @@ var PlayerCharge = 0
 var enemySpeed = 40
 var enemyCharge = 0
 
-var enemyDef = 2
+var enemyDef = 4
 var PLayerDef = 3
 var EnemyattackChoice = 0
 var EnemyDodgeChoice =0
@@ -22,8 +22,12 @@ var PLayerDodgeChoice = 0
 var PlayerattackChoice =0 
 
 var criticalDamageMultiplier 
+var enemyCriticalDamageMultiplier
+var furtureSightLvl = 1
+var furtureSightSuccess
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
 	$UI/enemyHPBar.max_value = enemyHP
 	$UI/enemyHPBar.value = enemyHP
 	$UI/Panel/playerHPBar.max_value = PlayerHP
@@ -44,19 +48,24 @@ func _process(delta):
 	if PlayerCharge >= 100:
 		charging = false
 		enemiesTurn = false
-	
+	if enemiesTurn:
+		$UI/turnIndicator.text = "Enemy's turn"
+	elif charging:
+		$UI/turnIndicator.text = "Charging"
+	else:
+		$UI/turnIndicator.text = "Your turn"
 
 	if enemiesTurn and !waitingForPlayer:
-		
+		enemyCriticalDamageMultiplier = randf_range(0.5, 2.25)
 		if PLayerDef < 2:
-			$UI/Panel/playerHPBar.value -= enemyDamage
+			$UI/Panel/playerHPBar.value -= enemyDamage *enemyCriticalDamageMultiplier
 			enemyCharge = 0
 			enemiesTurn = false
 			charging = true
 			
 		if PLayerDef == 2:
-			
 			EnemyattackChoice = randi_range(1,2)
+			
 			$UI/Panel/dodgeDirection.visible = true
 			$UI/Panel/dodgeDirection/UP.visible = true
 			$UI/Panel/dodgeDirection/DOWN.visible = true
@@ -71,7 +80,7 @@ func _process(delta):
 			$UI/Panel/dodgeDirection/LEFT.visible = true
 			waitingForPlayer = true
 			enemyCharge = 0
-		if PLayerDef == 4:
+		if PLayerDef >= 4:
 			
 			EnemyattackChoice = randi_range(1,4)
 			$UI/Panel/dodgeDirection.visible = true
@@ -88,24 +97,63 @@ func _process(delta):
 
 
 func _on_button_button_down():
+	if waitingForPlayer or enemiesTurn or PlayerCharge <= 100 :
+		return
+	
 	criticalDamageMultiplier = randf_range(0.9, 3.5)
-	if !enemiesTurn and PlayerCharge >= 100 and (enemyDef == 1|| enemyDef == 0):
+	if (enemyDef == 1|| enemyDef == 0):
 		$UI/enemyHPBar.value -= playerDamage * criticalDamageMultiplier
 		charging = true
 		PlayerCharge = 0
 	if enemyDef == 2:
 		EnemyDodgeChoice  = randi_range(1,2)
+		furtureSightSuccess = randi_range(0,10)
+		if furtureSightSuccess <= furtureSightLvl:
+
+			match EnemyDodgeChoice:
+				1:
+					$UI/Panel/attackDirection/ATTACKUP.modulate= (Color.YELLOW)
+				2:
+					$UI/Panel/attackDirection/ATTACKDOWN.modulate= (Color.YELLOW)
+				3:
+					$UI/Panel/attackDirection/ATTACKLEFT.modulate= (Color.YELLOW)
+				4:
+					$UI/Panel/attackDirection/ATTACKRIGHT.modulate= (Color.YELLOW)
 		$UI/Panel/attackDirection.visible = true
 		$UI/Panel/attackDirection/ATTACKUP.visible = true
 		$UI/Panel/attackDirection/ATTACKDOWN.visible = true
 	if enemyDef == 3:
 		EnemyDodgeChoice  = randi_range(1,3)
+		furtureSightSuccess = randi_range(0,10)
+		if furtureSightSuccess <= furtureSightLvl:
+
+			match EnemyDodgeChoice:
+				1:
+					$UI/Panel/attackDirection/ATTACKUP.modulate= (Color.YELLOW)
+				2:
+					$UI/Panel/attackDirection/ATTACKDOWN.modulate= (Color.YELLOW)
+				3:
+					$UI/Panel/attackDirection/ATTACKLEFT.modulate= (Color.YELLOW)
+				4:
+					$UI/Panel/attackDirection/ATTACKRIGHT.modulate= (Color.YELLOW)
 		$UI/Panel/attackDirection.visible = true
 		$UI/Panel/attackDirection/ATTACKUP.visible = true
 		$UI/Panel/attackDirection/ATTACKDOWN.visible = true
 		$UI/Panel/attackDirection/ATTACKLEFT.visible = true
-	if enemyDef == 4:
+	if enemyDef >= 4:
 		EnemyDodgeChoice  = randi_range(1,4)
+		furtureSightSuccess = randi_range(0,10)
+		if furtureSightSuccess <= furtureSightLvl:
+
+			match EnemyDodgeChoice:
+				1:
+					$UI/Panel/attackDirection/ATTACKUP.modulate= (Color.YELLOW)
+				2:
+					$UI/Panel/attackDirection/ATTACKDOWN.modulate= (Color.YELLOW)
+				3:
+					$UI/Panel/attackDirection/ATTACKLEFT.modulate= (Color.YELLOW)
+				4:
+					$UI/Panel/attackDirection/ATTACKRIGHT.modulate= (Color.YELLOW)
 		$UI/Panel/attackDirection.visible = true
 		$UI/Panel/attackDirection/ATTACKUP.visible = true
 		$UI/Panel/attackDirection/ATTACKDOWN.visible = true
@@ -115,9 +163,12 @@ func _on_button_button_down():
 
 ##dodging enemies
 func _on_down_button_down() -> void:
+	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
 	PLayerDodgeChoice = 2
 	if (PLayerDodgeChoice == EnemyattackChoice) and waitingForPlayer:
-		$UI/Panel/playerHPBar.value -= enemyDamage
+		var damageGonnaTake = enemyDamage *enemyCriticalDamageMultiplier
+		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
+		$UI/Panel/playerHPBar.value -= damageGonnaTake
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -127,7 +178,7 @@ func _on_down_button_down() -> void:
 		charging = true
 		waitingForPlayer = false
 	elif (PLayerDodgeChoice != EnemyattackChoice) and waitingForPlayer:
-		$UI/Panel/playerHPBar.value -= int(PlayerHP/(5*PLayerDef))
+		$UI/Panel/playerHPBar.value -= int(PlayerHP/(2*PLayerDef))
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -139,9 +190,11 @@ func _on_down_button_down() -> void:
 
 
 func _on_up_button_down() -> void:
+	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
 	PLayerDodgeChoice = 1
 	if (PLayerDodgeChoice == EnemyattackChoice) and waitingForPlayer:
-		$UI/Panel/playerHPBar.value -= enemyDamage
+		var damageGonnaTake = enemyDamage *enemyCriticalDamageMultiplier
+		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -151,7 +204,9 @@ func _on_up_button_down() -> void:
 		charging = true
 		waitingForPlayer = false
 	elif (PLayerDodgeChoice != EnemyattackChoice) and waitingForPlayer:
-		$UI/Panel/playerHPBar.value -= int(PlayerHP/(5*PLayerDef))
+		var damageGonnaTake = int(PlayerHP/(2*PLayerDef))
+		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
+		$UI/Panel/playerHPBar.value -= damageGonnaTake
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -162,10 +217,11 @@ func _on_up_button_down() -> void:
 		waitingForPlayer = false
 
 func _on_left_button_down() -> void:
+	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
 	PLayerDodgeChoice = 3
 	if (PLayerDodgeChoice == EnemyattackChoice) and waitingForPlayer:
-		
-		$UI/Panel/playerHPBar.value -= enemyDamage
+		var damageGonnaTake = enemyDamage *enemyCriticalDamageMultiplier
+		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -175,7 +231,9 @@ func _on_left_button_down() -> void:
 		charging = true
 		waitingForPlayer = false
 	elif (PLayerDodgeChoice != EnemyattackChoice) and waitingForPlayer:
-		$UI/Panel/playerHPBar.value -= int(PlayerHP/(5*PLayerDef))
+		var damageGonnaTake = int(PlayerHP/(2*PLayerDef))
+		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
+		$UI/Panel/playerHPBar.value -= damageGonnaTake
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -186,9 +244,11 @@ func _on_left_button_down() -> void:
 		waitingForPlayer = false
 
 func _on_right_button_down() -> void:
+	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
 	PLayerDodgeChoice = 4
 	if (PLayerDodgeChoice == EnemyattackChoice) and waitingForPlayer:
-		$UI/Panel/playerHPBar.value -= enemyDamage
+		var damageGonnaTake = enemyDamage *enemyCriticalDamageMultiplier
+		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -198,7 +258,9 @@ func _on_right_button_down() -> void:
 		charging = true
 		waitingForPlayer = false
 	elif (PLayerDodgeChoice != EnemyattackChoice) and waitingForPlayer:
-		$UI/Panel/playerHPBar.value -= int(PlayerHP/(5*PLayerDef))
+		var damageGonnaTake = int(PlayerHP/(2*PLayerDef))
+		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
+		$UI/Panel/playerHPBar.value -= damageGonnaTake
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -208,93 +270,100 @@ func _on_right_button_down() -> void:
 		charging = true
 		waitingForPlayer = false
 
-## attacking the enem
+## attacking the enemy
 
 
 func _on_attackup_button_down() -> void:
+	$UI/enemyDamagetaken/DamageIndicatorCD.start()
 	PlayerattackChoice = 1
 	if PlayerattackChoice == EnemyDodgeChoice:
-		$UI/enemyHPBar.value -= playerDamage * criticalDamageMultiplier
-		$UI/Panel/attackDirection.visible = false
-		$UI/Panel/attackDirection/ATTACKUP.visible = false
-		$UI/Panel/attackDirection/ATTACKDOWN.visible = false
-		$UI/Panel/attackDirection/ATTACKLEFT.visible = false
-		$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+		var damage = playerDamage * criticalDamageMultiplier
+		$UI/enemyDamagetaken.text = str(int(damage))
+		$UI/enemyHPBar.value -= damage
+		finishedPLayerAttack()
 		charging = true
+		
+		
 		PlayerCharge = 0
 	else:
-		$UI/enemyHPBar.value -= (playerDamage/enemyDef)
-		$UI/Panel/attackDirection.visible = false
-		$UI/Panel/attackDirection/ATTACKUP.visible = false
-		$UI/Panel/attackDirection/ATTACKDOWN.visible = false
-		$UI/Panel/attackDirection/ATTACKLEFT.visible = false
-		$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+		var damage= (playerDamage/3*enemyDef)
+		$UI/enemyDamagetaken.text = "ok ATk -" + str(int(damage))
+		$UI/enemyHPBar.value -= damage
+		finishedPLayerAttack()
 		charging = true
 		PlayerCharge = 0
 		
 
 
 func _on_attackdown_button_down() -> void:
+	$UI/enemyDamagetaken/DamageIndicatorCD.start()
 	PlayerattackChoice = 2
 	if PlayerattackChoice == EnemyDodgeChoice:
-		$UI/enemyHPBar.value -= playerDamage * criticalDamageMultiplier
-		$UI/Panel/attackDirection.visible = false
-		$UI/Panel/attackDirection/ATTACKUP.visible = false
-		$UI/Panel/attackDirection/ATTACKDOWN.visible = false
-		$UI/Panel/attackDirection/ATTACKLEFT.visible = false
-		$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+		var damage = playerDamage * criticalDamageMultiplier
+		$UI/enemyDamagetaken.text = str(int(damage))
+		$UI/enemyHPBar.value -= damage
+		finishedPLayerAttack()
 		charging = true
 		PlayerCharge = 0
 	else:
-		$UI/enemyHPBar.value -= (playerDamage/enemyDef)
-		$UI/Panel/attackDirection.visible = false
-		$UI/Panel/attackDirection/ATTACKUP.visible = false
-		$UI/Panel/attackDirection/ATTACKDOWN.visible = false
-		$UI/Panel/attackDirection/ATTACKLEFT.visible = false
-		$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+		var damage= (playerDamage/3*enemyDef)
+		$UI/enemyDamagetaken.text = "ok ATk -" + str(int(damage))
+		$UI/enemyHPBar.value -= damage
+		finishedPLayerAttack()
 		charging = true
 		PlayerCharge = 0
 
 
 func _on_attackleft_button_down() -> void:
+	$UI/enemyDamagetaken/DamageIndicatorCD.start()
 	PlayerattackChoice = 3
 	if PlayerattackChoice == EnemyDodgeChoice:
-		$UI/enemyHPBar.value -= playerDamage * criticalDamageMultiplier
-		$UI/Panel/attackDirection.visible = false
-		$UI/Panel/attackDirection/ATTACKUP.visible = false
-		$UI/Panel/attackDirection/ATTACKDOWN.visible = false
-		$UI/Panel/attackDirection/ATTACKLEFT.visible = false
-		$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+		var damage = playerDamage * criticalDamageMultiplier
+		$UI/enemyDamagetaken.text = str(int(damage))
+		$UI/enemyHPBar.value -= damage
+		finishedPLayerAttack()
 		charging = true
 		PlayerCharge = 0
 	else:
-		$UI/enemyHPBar.value -= (playerDamage/enemyDef)
-		$UI/Panel/attackDirection.visible = false
-		$UI/Panel/attackDirection/ATTACKUP.visible = false
-		$UI/Panel/attackDirection/ATTACKDOWN.visible = false
-		$UI/Panel/attackDirection/ATTACKLEFT.visible = false
-		$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+		var damage= (playerDamage/3*enemyDef)
+		$UI/enemyDamagetaken.text = "ok ATk -" + str(int(damage))
+		$UI/enemyHPBar.value -= damage
+		finishedPLayerAttack()
 		charging = true
 		PlayerCharge = 0
 
 
 func _on_attackright_button_down() -> void:
+	$UI/enemyDamagetaken/DamageIndicatorCD.start()
 	PlayerattackChoice = 4
 	if PlayerattackChoice == EnemyDodgeChoice:
-		$UI/enemyHPBar.value -= playerDamage * criticalDamageMultiplier
-		$UI/Panel/attackDirection.visible = false
-		$UI/Panel/attackDirection/ATTACKUP.visible = false
-		$UI/Panel/attackDirection/ATTACKDOWN.visible = false
-		$UI/Panel/attackDirection/ATTACKLEFT.visible = false
-		$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+		var damage = playerDamage * criticalDamageMultiplier
+		$UI/enemyDamagetaken.text = str(int(damage))
+		$UI/enemyHPBar.value -= damage
+		finishedPLayerAttack()
 		charging = true
 		PlayerCharge = 0
 	else:
-		$UI/enemyHPBar.value -= (playerDamage/enemyDef)
-		$UI/Panel/attackDirection.visible = false
-		$UI/Panel/attackDirection/ATTACKUP.visible = false
-		$UI/Panel/attackDirection/ATTACKDOWN.visible = false
-		$UI/Panel/attackDirection/ATTACKLEFT.visible = false
-		$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+		var damage= (playerDamage/3*enemyDef)
+		$UI/enemyDamagetaken.text = "ok ATk -" + str(int(damage))
+		$UI/enemyHPBar.value -= damage
+		finishedPLayerAttack()
 		charging = true
 		PlayerCharge = 0
+
+
+func finishedPLayerAttack():
+	$UI/Panel/attackDirection.visible = false
+	$UI/Panel/attackDirection/ATTACKUP.visible = false
+	$UI/Panel/attackDirection/ATTACKDOWN.visible = false
+	$UI/Panel/attackDirection/ATTACKLEFT.visible = false
+	$UI/Panel/attackDirection/ATTACKRIGHT.visible = false
+	$UI/Panel/attackDirection/ATTACKUP.modulate= (Color.GHOST_WHITE)
+	$UI/Panel/attackDirection/ATTACKDOWN.modulate= (Color.GHOST_WHITE)
+	$UI/Panel/attackDirection/ATTACKLEFT.modulate= (Color.GHOST_WHITE)
+	$UI/Panel/attackDirection/ATTACKRIGHT.modulate= (Color.GHOST_WHITE)
+
+
+func _on_damage_indicator_cd_timeout() -> void:
+	$UI/PlayerDamagetaken.text = ""
+	$UI/enemyDamagetaken.text = ""

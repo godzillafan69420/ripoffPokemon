@@ -11,7 +11,6 @@ script = ExtResource("1_bqai8")
 
 [node name="Don\'tForgetToRemenber" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_6t8i5")
-autoplay = true
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -21,10 +20,10 @@ offset_bottom = 359.0
 
 [node name="enemyHPBar" type="TextureProgressBar" parent="UI"]
 layout_mode = 0
-offset_left = 41.0
-offset_top = 28.0
-offset_right = 169.0
-offset_bottom = 60.0
+offset_left = 19.0
+offset_top = 17.0
+offset_right = 147.0
+offset_bottom = 49.0
 max_value = 20.0
 value = 20.0
 rounded = true
@@ -41,33 +40,6 @@ rounded = true
 texture_progress = ExtResource("2_7sfm4")
 tint_over = Color(0.9796547, 0.74454045, 0.9658639, 1)
 tint_progress = Color(0.42181668, 0.6514035, 0.85754997, 1)
-
-[node name="EnemyHPLabel" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 17.0
-offset_top = 36.0
-offset_right = 57.0
-offset_bottom = 59.0
-theme_override_fonts/font = ExtResource("3_i431l")
-text = "HP"
-
-[node name="EnemycooldownLabel" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 225.0
-offset_top = 145.0
-offset_right = 265.0
-offset_bottom = 168.0
-theme_override_fonts/font = ExtResource("3_i431l")
-text = "CD"
-
-[node name="EnemyName" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 44.0
-offset_top = 7.0
-offset_right = 106.0
-offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("3_i431l")
-text = "yourMom"
 
 [node name="Panel" type="Panel" parent="UI"]
 layout_mode = 0
@@ -222,39 +194,6 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_i431l")
 text = "RIGHT"
 
-[node name="turnIndicator" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 68.0
-offset_right = 180.0
-offset_bottom = 107.0
-
-[node name="PlayerDamagetaken" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 433.0
-offset_top = 61.0
-offset_right = 473.0
-offset_bottom = 84.0
-scale = Vector2(2.24, 2.04)
-theme_override_colors/font_color = Color(0.89573556, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_i431l")
-
-[node name="DamageIndicatorCD" type="Timer" parent="UI/PlayerDamagetaken"]
-one_shot = true
-
-[node name="enemyDamagetaken" type="Label" parent="UI"]
-layout_mode = 0
-offset_left = 386.0
-offset_top = 111.00001
-offset_right = 394.2726
-offset_bottom = 130.0
-scale = Vector2(3.6264174, 2.6188345)
-theme_override_colors/font_color = Color(0.3038669, 0.38479647, 1, 1)
-theme_override_fonts/font = ExtResource("3_i431l")
-
-[node name="DamageIndicatorCD" type="Timer" parent="UI/enemyDamagetaken"]
-one_shot = true
-
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(315, 75)
 texture = ExtResource("2_cnxwr")
@@ -268,5 +207,3 @@ texture = ExtResource("2_cnxwr")
 [connection signal="button_down" from="UI/Panel/dodgeDirection/DOWN" to="." method="_on_down_button_down"]
 [connection signal="button_down" from="UI/Panel/dodgeDirection/LEFT" to="." method="_on_left_button_down"]
 [connection signal="button_down" from="UI/Panel/dodgeDirection/RIGHT" to="." method="_on_right_button_down"]
-[connection signal="timeout" from="UI/PlayerDamagetaken/DamageIndicatorCD" to="." method="_on_damage_indicator_cd_timeout"]
-[connection signal="timeout" from="UI/enemyDamagetaken/DamageIndicatorCD" to="." method="_on_damage_indicator_cd_timeout"]
