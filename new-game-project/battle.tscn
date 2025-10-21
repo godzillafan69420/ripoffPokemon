@@ -32,10 +32,10 @@ texture_progress = ExtResource("2_7sfm4")
 
 [node name="enemyChargeBar" type="TextureProgressBar" parent="UI"]
 layout_mode = 0
-offset_left = 250.0
-offset_top = 152.0
-offset_right = 378.0
-offset_bottom = 184.0
+offset_left = 249.0
+offset_top = 138.0
+offset_right = 377.0
+offset_bottom = 170.0
 value = 20.0
 rounded = true
 texture_progress = ExtResource("2_7sfm4")
@@ -45,52 +45,52 @@ tint_progress = Color(0.42181668, 0.6514035, 0.85754997, 1)
 [node name="Panel" type="Panel" parent="UI"]
 layout_mode = 0
 offset_left = -2.0
-offset_top = 199.0
+offset_top = 171.0
 offset_right = 642.0
 offset_bottom = 360.0
 
 [node name="attack" type="Button" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 9.0
-offset_top = 88.0
+offset_top = 115.0
 offset_right = 149.0
-offset_bottom = 121.0
+offset_bottom = 148.0
 theme_override_fonts/font = ExtResource("3_i431l")
 text = "attack"
 
 [node name="Button2" type="Button" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 170.0
-offset_top = 90.0
+offset_top = 117.0
 offset_right = 310.0
-offset_bottom = 123.0
+offset_bottom = 150.0
 theme_override_fonts/font = ExtResource("3_i431l")
 text = "fart"
 
 [node name="Button3" type="Button" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 329.0
-offset_top = 90.0
+offset_top = 117.0
 offset_right = 469.0
-offset_bottom = 123.0
+offset_bottom = 150.0
 theme_override_fonts/font = ExtResource("3_i431l")
 text = "fart"
 
 [node name="kys" type="Button" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 492.0
-offset_top = 89.0
+offset_top = 116.0
 offset_right = 632.0
-offset_bottom = 122.0
+offset_bottom = 149.0
 theme_override_fonts/font = ExtResource("3_i431l")
 text = "kys"
 
 [node name="playerHPBar" type="TextureProgressBar" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 332.0
-offset_top = 127.0
+offset_top = 154.0
 offset_right = 460.0
-offset_bottom = 159.0
+offset_bottom = 186.0
 max_value = 20.0
 value = 20.0
 rounded = true
@@ -99,9 +99,9 @@ texture_progress = ExtResource("2_7sfm4")
 [node name="playerChargeBar" type="TextureProgressBar" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 504.0
-offset_top = 128.0
+offset_top = 155.0
 offset_right = 632.0
-offset_bottom = 160.0
+offset_bottom = 187.0
 value = 20.0
 rounded = true
 texture_progress = ExtResource("2_7sfm4")
@@ -111,23 +111,99 @@ tint_progress = Color(0.42181668, 0.6514035, 0.85754997, 1)
 [node name="playerHP" type="Label" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 281.0
-offset_top = 134.0
+offset_top = 161.0
 offset_right = 321.0
-offset_bottom = 157.0
+offset_bottom = 184.0
 theme_override_fonts/font = ExtResource("3_i431l")
 text = "HP"
 
 [node name="PlayerSpeed" type="Label" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 473.0
-offset_top = 133.0
+offset_top = 160.0
 offset_right = 500.0
-offset_bottom = 156.0
+offset_bottom = 183.0
 theme_override_fonts/font = ExtResource("3_i431l")
 text = "CD"
 
+[node name="attackDirection" type="GridContainer" parent="UI/Panel"]
+visible = false
+layout_mode = 0
+offset_left = 167.0
+offset_top = 3.0
+offset_right = 275.0
+offset_bottom = 61.0
+scale = Vector2(2.9433963, 1.9069767)
+columns = 2
+
+[node name="ATTACKUP" type="Button" parent="UI/Panel/attackDirection"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "UP"
+
+[node name="ATTACKDOWN" type="Button" parent="UI/Panel/attackDirection"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "DOWN"
+
+[node name="ATTACKLEFT" type="Button" parent="UI/Panel/attackDirection"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "LEFT"
+
+[node name="ATTACKRIGHT" type="Button" parent="UI/Panel/attackDirection"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "RIGHT"
+
+[node name="dodgeDirection" type="GridContainer" parent="UI/Panel"]
+visible = false
+layout_mode = 0
+offset_left = 167.0
+offset_top = 3.0
+offset_right = 275.0
+offset_bottom = 61.0
+scale = Vector2(2.9433963, 1.9069767)
+columns = 2
+
+[node name="UP" type="Button" parent="UI/Panel/dodgeDirection"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "UP"
+
+[node name="DOWN" type="Button" parent="UI/Panel/dodgeDirection"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "DOWN"
+
+[node name="LEFT" type="Button" parent="UI/Panel/dodgeDirection"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "LEFT"
+
+[node name="RIGHT" type="Button" parent="UI/Panel/dodgeDirection"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_i431l")
+text = "RIGHT"
+
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(315, 85)
+position = Vector2(315, 75)
 texture = ExtResource("2_cnxwr")
 
 [connection signal="button_down" from="UI/Panel/attack" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="UI/Panel/attackDirection/ATTACKUP" to="." method="_on_attackup_button_down"]
+[connection signal="button_down" from="UI/Panel/attackDirection/ATTACKDOWN" to="." method="_on_attackdown_button_down"]
+[connection signal="button_down" from="UI/Panel/attackDirection/ATTACKLEFT" to="." method="_on_attackleft_button_down"]
+[connection signal="button_down" from="UI/Panel/attackDirection/ATTACKRIGHT" to="." method="_on_attackright_button_down"]
+[connection signal="button_down" from="UI/Panel/dodgeDirection/UP" to="." method="_on_up_button_down"]
+[connection signal="button_down" from="UI/Panel/dodgeDirection/DOWN" to="." method="_on_down_button_down"]
+[connection signal="button_down" from="UI/Panel/dodgeDirection/LEFT" to="." method="_on_left_button_down"]
+[connection signal="button_down" from="UI/Panel/dodgeDirection/RIGHT" to="." method="_on_right_button_down"]
