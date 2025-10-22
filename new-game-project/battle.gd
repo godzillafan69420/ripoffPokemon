@@ -14,13 +14,14 @@ var PlayerCharge = 0
 var enemySpeed = 40
 var enemyCharge = 0
 
-var enemyDef = 4
-var PLayerDef = 3
+var enemyDef = 2
+var PLayerDef = 4
 var EnemyattackChoice = 0
 var EnemyDodgeChoice =0
 var PLayerDodgeChoice = 0
 var PlayerattackChoice =0 
 
+var criticalDamageMinium = 0.9
 var criticalDamageMultiplier 
 var enemyCriticalDamageMultiplier
 var furtureSightLvl = 1
@@ -56,7 +57,7 @@ func _process(delta):
 		$UI/turnIndicator.text = "Your turn"
 
 	if enemiesTurn and !waitingForPlayer:
-		enemyCriticalDamageMultiplier = randf_range(0.5, 2.25)
+		enemyCriticalDamageMultiplier = randf_range(1, 3)
 		if PLayerDef < 2:
 			$UI/Panel/playerHPBar.value -= enemyDamage *enemyCriticalDamageMultiplier
 			enemyCharge = 0
@@ -100,7 +101,7 @@ func _on_button_button_down():
 	if waitingForPlayer or enemiesTurn or PlayerCharge <= 100 :
 		return
 	
-	criticalDamageMultiplier = randf_range(0.9, 3.5)
+	criticalDamageMultiplier = randf_range(criticalDamageMinium, 3.5)
 	if (enemyDef == 1|| enemyDef == 0):
 		$UI/enemyHPBar.value -= playerDamage * criticalDamageMultiplier
 		charging = true
@@ -160,14 +161,10 @@ func _on_button_button_down():
 		$UI/Panel/attackDirection/ATTACKLEFT.visible = true
 		$UI/Panel/attackDirection/ATTACKRIGHT.visible = true
 	
-
-##dodging enemies
-func _on_down_button_down() -> void:
-	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
-	PLayerDodgeChoice = 2
-	if (PLayerDodgeChoice == EnemyattackChoice) and waitingForPlayer:
+func dodging(dodgeInputs):
+	if (dodgeInputs == EnemyattackChoice) and waitingForPlayer:
 		var damageGonnaTake = enemyDamage *enemyCriticalDamageMultiplier
-		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
+		$UI/PlayerDamagetaken.text = "taken -" + str(int(damageGonnaTake))
 		$UI/Panel/playerHPBar.value -= damageGonnaTake
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
@@ -177,8 +174,10 @@ func _on_down_button_down() -> void:
 		enemiesTurn = false
 		charging = true
 		waitingForPlayer = false
-	elif (PLayerDodgeChoice != EnemyattackChoice) and waitingForPlayer:
-		$UI/Panel/playerHPBar.value -= int(PlayerHP/(2*PLayerDef))
+	elif (dodgeInputs != EnemyattackChoice) and waitingForPlayer:
+		var damageGonnaTake =PlayerHP/(2*PLayerDef)
+		$UI/PlayerDamagetaken.text = "blocked -" + str(int(damageGonnaTake))
+		$UI/Panel/playerHPBar.value -= int(damageGonnaTake)
 		$UI/Panel/dodgeDirection.visible = false
 		$UI/Panel/dodgeDirection/UP.visible = false
 		$UI/Panel/dodgeDirection/DOWN.visible = false
@@ -187,98 +186,34 @@ func _on_down_button_down() -> void:
 		enemiesTurn = false
 		charging = true
 		waitingForPlayer = false
+##dodging enemies
+func _on_down_button_down() -> void:
+	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
+	PLayerDodgeChoice = 2
+	dodging(PLayerDodgeChoice)
+	
 
 
 func _on_up_button_down() -> void:
 	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
 	PLayerDodgeChoice = 1
-	if (PLayerDodgeChoice == EnemyattackChoice) and waitingForPlayer:
-		var damageGonnaTake = enemyDamage *enemyCriticalDamageMultiplier
-		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
-		$UI/Panel/dodgeDirection.visible = false
-		$UI/Panel/dodgeDirection/UP.visible = false
-		$UI/Panel/dodgeDirection/DOWN.visible = false
-		$UI/Panel/dodgeDirection/LEFT.visible = false
-		$UI/Panel/dodgeDirection/RIGHT.visible = false
-		enemiesTurn = false
-		charging = true
-		waitingForPlayer = false
-	elif (PLayerDodgeChoice != EnemyattackChoice) and waitingForPlayer:
-		var damageGonnaTake = int(PlayerHP/(2*PLayerDef))
-		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
-		$UI/Panel/playerHPBar.value -= damageGonnaTake
-		$UI/Panel/dodgeDirection.visible = false
-		$UI/Panel/dodgeDirection/UP.visible = false
-		$UI/Panel/dodgeDirection/DOWN.visible = false
-		$UI/Panel/dodgeDirection/LEFT.visible = false
-		$UI/Panel/dodgeDirection/RIGHT.visible = false
-		enemiesTurn = false
-		charging = true
-		waitingForPlayer = false
+	dodging(PLayerDodgeChoice)
 
 func _on_left_button_down() -> void:
 	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
 	PLayerDodgeChoice = 3
-	if (PLayerDodgeChoice == EnemyattackChoice) and waitingForPlayer:
-		var damageGonnaTake = enemyDamage *enemyCriticalDamageMultiplier
-		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
-		$UI/Panel/dodgeDirection.visible = false
-		$UI/Panel/dodgeDirection/UP.visible = false
-		$UI/Panel/dodgeDirection/DOWN.visible = false
-		$UI/Panel/dodgeDirection/LEFT.visible = false
-		$UI/Panel/dodgeDirection/RIGHT.visible = false
-		enemiesTurn = false
-		charging = true
-		waitingForPlayer = false
-	elif (PLayerDodgeChoice != EnemyattackChoice) and waitingForPlayer:
-		var damageGonnaTake = int(PlayerHP/(2*PLayerDef))
-		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
-		$UI/Panel/playerHPBar.value -= damageGonnaTake
-		$UI/Panel/dodgeDirection.visible = false
-		$UI/Panel/dodgeDirection/UP.visible = false
-		$UI/Panel/dodgeDirection/DOWN.visible = false
-		$UI/Panel/dodgeDirection/LEFT.visible = false
-		$UI/Panel/dodgeDirection/RIGHT.visible = false
-		enemiesTurn = false
-		charging = true
-		waitingForPlayer = false
+	dodging(PLayerDodgeChoice)
 
 func _on_right_button_down() -> void:
 	$UI/PlayerDamagetaken/DamageIndicatorCD.start()
 	PLayerDodgeChoice = 4
-	if (PLayerDodgeChoice == EnemyattackChoice) and waitingForPlayer:
-		var damageGonnaTake = enemyDamage *enemyCriticalDamageMultiplier
-		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
-		$UI/Panel/dodgeDirection.visible = false
-		$UI/Panel/dodgeDirection/UP.visible = false
-		$UI/Panel/dodgeDirection/DOWN.visible = false
-		$UI/Panel/dodgeDirection/LEFT.visible = false
-		$UI/Panel/dodgeDirection/RIGHT.visible = false
-		enemiesTurn = false
-		charging = true
-		waitingForPlayer = false
-	elif (PLayerDodgeChoice != EnemyattackChoice) and waitingForPlayer:
-		var damageGonnaTake = int(PlayerHP/(2*PLayerDef))
-		$UI/PlayerDamagetaken.text = str(int(damageGonnaTake))
-		$UI/Panel/playerHPBar.value -= damageGonnaTake
-		$UI/Panel/dodgeDirection.visible = false
-		$UI/Panel/dodgeDirection/UP.visible = false
-		$UI/Panel/dodgeDirection/DOWN.visible = false
-		$UI/Panel/dodgeDirection/LEFT.visible = false
-		$UI/Panel/dodgeDirection/RIGHT.visible = false
-		enemiesTurn = false
-		charging = true
-		waitingForPlayer = false
+	dodging(PLayerDodgeChoice)
 
 ## attacking the enemy
-
-
-func _on_attackup_button_down() -> void:
-	$UI/enemyDamagetaken/DamageIndicatorCD.start()
-	PlayerattackChoice = 1
-	if PlayerattackChoice == EnemyDodgeChoice:
+func attackingEnemy(target):
+	if target == EnemyDodgeChoice:
 		var damage = playerDamage * criticalDamageMultiplier
-		$UI/enemyDamagetaken.text = str(int(damage))
+		$UI/enemyDamagetaken.text = "hit -" + str(int(damage))
 		$UI/enemyHPBar.value -= damage
 		finishedPLayerAttack()
 		charging = true
@@ -292,64 +227,30 @@ func _on_attackup_button_down() -> void:
 		finishedPLayerAttack()
 		charging = true
 		PlayerCharge = 0
+
+func _on_attackup_button_down() -> void:
+	$UI/enemyDamagetaken/DamageIndicatorCD.start()
+	PlayerattackChoice = 1
+	attackingEnemy(PlayerattackChoice)
 		
 
 
 func _on_attackdown_button_down() -> void:
 	$UI/enemyDamagetaken/DamageIndicatorCD.start()
 	PlayerattackChoice = 2
-	if PlayerattackChoice == EnemyDodgeChoice:
-		var damage = playerDamage * criticalDamageMultiplier
-		$UI/enemyDamagetaken.text = str(int(damage))
-		$UI/enemyHPBar.value -= damage
-		finishedPLayerAttack()
-		charging = true
-		PlayerCharge = 0
-	else:
-		var damage= (playerDamage/3*enemyDef)
-		$UI/enemyDamagetaken.text = "ok ATk -" + str(int(damage))
-		$UI/enemyHPBar.value -= damage
-		finishedPLayerAttack()
-		charging = true
-		PlayerCharge = 0
+	attackingEnemy(PlayerattackChoice)
 
 
 func _on_attackleft_button_down() -> void:
 	$UI/enemyDamagetaken/DamageIndicatorCD.start()
 	PlayerattackChoice = 3
-	if PlayerattackChoice == EnemyDodgeChoice:
-		var damage = playerDamage * criticalDamageMultiplier
-		$UI/enemyDamagetaken.text = str(int(damage))
-		$UI/enemyHPBar.value -= damage
-		finishedPLayerAttack()
-		charging = true
-		PlayerCharge = 0
-	else:
-		var damage= (playerDamage/3*enemyDef)
-		$UI/enemyDamagetaken.text = "ok ATk -" + str(int(damage))
-		$UI/enemyHPBar.value -= damage
-		finishedPLayerAttack()
-		charging = true
-		PlayerCharge = 0
+	attackingEnemy(PlayerattackChoice)
 
 
 func _on_attackright_button_down() -> void:
 	$UI/enemyDamagetaken/DamageIndicatorCD.start()
 	PlayerattackChoice = 4
-	if PlayerattackChoice == EnemyDodgeChoice:
-		var damage = playerDamage * criticalDamageMultiplier
-		$UI/enemyDamagetaken.text = str(int(damage))
-		$UI/enemyHPBar.value -= damage
-		finishedPLayerAttack()
-		charging = true
-		PlayerCharge = 0
-	else:
-		var damage= (playerDamage/3*enemyDef)
-		$UI/enemyDamagetaken.text = "ok ATk -" + str(int(damage))
-		$UI/enemyHPBar.value -= damage
-		finishedPLayerAttack()
-		charging = true
-		PlayerCharge = 0
+	attackingEnemy(PlayerattackChoice)
 
 
 func finishedPLayerAttack():

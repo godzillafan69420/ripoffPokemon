@@ -231,10 +231,10 @@ offset_bottom = 107.0
 
 [node name="PlayerDamagetaken" type="Label" parent="UI"]
 layout_mode = 0
-offset_left = 433.0
-offset_top = 61.0
-offset_right = 473.0
-offset_bottom = 84.0
+offset_left = 388.0
+offset_top = 52.999996
+offset_right = 428.0
+offset_bottom = 76.0
 scale = Vector2(2.24, 2.04)
 theme_override_colors/font_color = Color(0.89573556, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_i431l")
@@ -246,8 +246,8 @@ one_shot = true
 layout_mode = 0
 offset_left = 386.0
 offset_top = 111.00001
-offset_right = 394.2726
-offset_bottom = 130.0
+offset_right = 392.34235
+offset_bottom = 130.09247
 scale = Vector2(3.6264174, 2.6188345)
 theme_override_colors/font_color = Color(0.3038669, 0.38479647, 1, 1)
 theme_override_fonts/font = ExtResource("3_i431l")
