@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://bw5xhwthmgl4h"]
-
-[node name="player" type="CharacterBody2D"]
-
-[node name="collision" type="Area2D" parent="."]

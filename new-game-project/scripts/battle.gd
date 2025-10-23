@@ -93,12 +93,10 @@ func _process(delta):
 			enemyCharge = 0
 	if waitingForPlayer:
 		enemyCharge = 0
-	print(PlayerCharge)
-	print(enemyCharge)
 
 
 func _on_button_button_down():
-	if waitingForPlayer or enemiesTurn or PlayerCharge <= 100 :
+	if waitingForPlayer or enemiesTurn or PlayerCharge < 100 :
 		return
 	
 	criticalDamageMultiplier = randf_range(criticalDamageMinium, 3.5)

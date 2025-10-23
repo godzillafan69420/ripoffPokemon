@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dffxvgjbulwpj"
-path="res://.godot/imported/Qdbettercomicsansalternates-z8823.ttf-660627ed4a3ed0faa2ee72575756f836.fontdata"
+path="res://.godot/imported/Qdbettercomicsansalternates-z8823.ttf-da61ac54ba35a5acb19a2a0f7237038f.fontdata"
 
 [deps]
 
-source_file="res://Qdbettercomicsansalternates-z8823.ttf"
-dest_files=["res://.godot/imported/Qdbettercomicsansalternates-z8823.ttf-660627ed4a3ed0faa2ee72575756f836.fontdata"]
+source_file="res://art/Qdbettercomicsansalternates-z8823.ttf"
+dest_files=["res://.godot/imported/Qdbettercomicsansalternates-z8823.ttf-da61ac54ba35a5acb19a2a0f7237038f.fontdata"]
 
 [params]
 

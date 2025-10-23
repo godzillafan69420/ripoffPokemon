@@ -1,23 +1,32 @@
-[gd_scene load_steps=6 format=3 uid="uid://do63bkf5ncslo"]
+[gd_scene load_steps=8 format=3 uid="uid://do63bkf5ncslo"]
 
-[ext_resource type="Script" uid="uid://cwyhnadmw1oiv" path="res://battle.gd" id="1_bqai8"]
-[ext_resource type="AudioStream" uid="uid://cmkpd4tps0m2a" path="res://don'tForgetToRemenber.mp3" id="2_6t8i5"]
-[ext_resource type="Texture2D" uid="uid://boxpeiav72v41" path="res://Hpbar.png" id="2_7sfm4"]
-[ext_resource type="Texture2D" uid="uid://dp8ettrswcx7l" path="res://icon.svg" id="2_cnxwr"]
-[ext_resource type="FontFile" uid="uid://dffxvgjbulwpj" path="res://Qdbettercomicsansalternates-z8823.ttf" id="3_i431l"]
+[ext_resource type="Script" uid="uid://cwyhnadmw1oiv" path="res://scripts/battle.gd" id="1_lpir7"]
+[ext_resource type="AudioStream" uid="uid://cmkpd4tps0m2a" path="res://music/don'tForgetToRemenber.mp3" id="2_6vh42"]
+[ext_resource type="Texture2D" uid="uid://boxpeiav72v41" path="res://art/Hpbar.png" id="3_4k1nj"]
+[ext_resource type="FontFile" uid="uid://dffxvgjbulwpj" path="res://art/Qdbettercomicsansalternates-z8823.ttf" id="4_f4pi3"]
+[ext_resource type="PackedScene" uid="uid://bsb18veudnh3f" path="res://scenes/dialog_system.tscn" id="6_6vh42"]
+[ext_resource type="Script" uid="uid://b673o2wh7at2u" path="res://scenes/dialog_system.gd" id="7_4k1nj"]
+[ext_resource type="Texture2D" uid="uid://bmstq0qoydbo6" path="res://art/vman2.0.png" id="7_f4pi3"]
 
 [node name="battle" type="Node2D"]
-script = ExtResource("1_bqai8")
+script = ExtResource("1_lpir7")
 
 [node name="Don\'tForgetToRemenber" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_6t8i5")
-autoplay = true
+stream = ExtResource("2_6vh42")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 639.0
 offset_bottom = 359.0
+
+[node name="ColorRect" type="ColorRect" parent="UI"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 182.0
+offset_bottom = 93.0
+color = Color(0.50140655, 0.5014065, 0.5014065, 1)
 
 [node name="enemyHPBar" type="TextureProgressBar" parent="UI"]
 layout_mode = 0
@@ -28,7 +37,7 @@ offset_bottom = 60.0
 max_value = 20.0
 value = 20.0
 rounded = true
-texture_progress = ExtResource("2_7sfm4")
+texture_progress = ExtResource("3_4k1nj")
 
 [node name="enemyChargeBar" type="TextureProgressBar" parent="UI"]
 layout_mode = 0
@@ -38,7 +47,7 @@ offset_right = 377.0
 offset_bottom = 170.0
 value = 20.0
 rounded = true
-texture_progress = ExtResource("2_7sfm4")
+texture_progress = ExtResource("3_4k1nj")
 tint_over = Color(0.9796547, 0.74454045, 0.9658639, 1)
 tint_progress = Color(0.42181668, 0.6514035, 0.85754997, 1)
 
@@ -48,7 +57,7 @@ offset_left = 17.0
 offset_top = 36.0
 offset_right = 57.0
 offset_bottom = 59.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "HP"
 
 [node name="EnemycooldownLabel" type="Label" parent="UI"]
@@ -57,7 +66,7 @@ offset_left = 225.0
 offset_top = 145.0
 offset_right = 265.0
 offset_bottom = 168.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "CD"
 
 [node name="EnemyName" type="Label" parent="UI"]
@@ -66,7 +75,7 @@ offset_left = 44.0
 offset_top = 7.0
 offset_right = 106.0
 offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "yourMom"
 
 [node name="Panel" type="Panel" parent="UI"]
@@ -82,7 +91,7 @@ offset_left = 9.0
 offset_top = 115.0
 offset_right = 149.0
 offset_bottom = 148.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "attack"
 
 [node name="Button2" type="Button" parent="UI/Panel"]
@@ -91,7 +100,7 @@ offset_left = 170.0
 offset_top = 117.0
 offset_right = 310.0
 offset_bottom = 150.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "fart"
 
 [node name="Button3" type="Button" parent="UI/Panel"]
@@ -100,7 +109,7 @@ offset_left = 329.0
 offset_top = 117.0
 offset_right = 469.0
 offset_bottom = 150.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "fart"
 
 [node name="kys" type="Button" parent="UI/Panel"]
@@ -109,7 +118,7 @@ offset_left = 492.0
 offset_top = 116.0
 offset_right = 632.0
 offset_bottom = 149.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "kys"
 
 [node name="playerHPBar" type="TextureProgressBar" parent="UI/Panel"]
@@ -121,7 +130,7 @@ offset_bottom = 186.0
 max_value = 20.0
 value = 20.0
 rounded = true
-texture_progress = ExtResource("2_7sfm4")
+texture_progress = ExtResource("3_4k1nj")
 
 [node name="playerChargeBar" type="TextureProgressBar" parent="UI/Panel"]
 layout_mode = 0
@@ -131,7 +140,7 @@ offset_right = 632.0
 offset_bottom = 187.0
 value = 20.0
 rounded = true
-texture_progress = ExtResource("2_7sfm4")
+texture_progress = ExtResource("3_4k1nj")
 tint_over = Color(0.9796547, 0.74454045, 0.9658639, 1)
 tint_progress = Color(0.42181668, 0.6514035, 0.85754997, 1)
 
@@ -141,7 +150,7 @@ offset_left = 281.0
 offset_top = 161.0
 offset_right = 321.0
 offset_bottom = 184.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "HP"
 
 [node name="PlayerSpeed" type="Label" parent="UI/Panel"]
@@ -150,7 +159,7 @@ offset_left = 473.0
 offset_top = 160.0
 offset_right = 500.0
 offset_bottom = 183.0
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "CD"
 
 [node name="attackDirection" type="GridContainer" parent="UI/Panel"]
@@ -167,25 +176,25 @@ columns = 2
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8865197, 0.89827347, 1, 1)
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "UP"
 
 [node name="ATTACKDOWN" type="Button" parent="UI/Panel/attackDirection"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "DOWN"
 
 [node name="ATTACKLEFT" type="Button" parent="UI/Panel/attackDirection"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "LEFT"
 
 [node name="ATTACKRIGHT" type="Button" parent="UI/Panel/attackDirection"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "RIGHT"
 
 [node name="dodgeDirection" type="GridContainer" parent="UI/Panel"]
@@ -201,25 +210,25 @@ columns = 2
 [node name="UP" type="Button" parent="UI/Panel/dodgeDirection"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "UP"
 
 [node name="DOWN" type="Button" parent="UI/Panel/dodgeDirection"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "DOWN"
 
 [node name="LEFT" type="Button" parent="UI/Panel/dodgeDirection"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "LEFT"
 
 [node name="RIGHT" type="Button" parent="UI/Panel/dodgeDirection"]
 visible = false
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "RIGHT"
 
 [node name="turnIndicator" type="Label" parent="UI"]
@@ -237,7 +246,7 @@ offset_right = 428.0
 offset_bottom = 76.0
 scale = Vector2(2.24, 2.04)
 theme_override_colors/font_color = Color(0.89573556, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 
 [node name="DamageIndicatorCD" type="Timer" parent="UI/PlayerDamagetaken"]
 one_shot = true
@@ -250,14 +259,18 @@ offset_right = 392.34235
 offset_bottom = 130.09247
 scale = Vector2(3.6264174, 2.6188345)
 theme_override_colors/font_color = Color(0.3038669, 0.38479647, 1, 1)
-theme_override_fonts/font = ExtResource("3_i431l")
+theme_override_fonts/font = ExtResource("4_f4pi3")
 
 [node name="DamageIndicatorCD" type="Timer" parent="UI/enemyDamagetaken"]
 one_shot = true
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(315, 75)
-texture = ExtResource("2_cnxwr")
+[node name="dialogSystem" parent="." instance=ExtResource("6_6vh42")]
+position = Vector2(387, 32)
+script = ExtResource("7_4k1nj")
+
+[node name="enemy" type="Sprite2D" parent="."]
+position = Vector2(316, 75)
+texture = ExtResource("7_f4pi3")
 
 [connection signal="button_down" from="UI/Panel/attack" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="UI/Panel/attackDirection/ATTACKUP" to="." method="_on_attackup_button_down"]
