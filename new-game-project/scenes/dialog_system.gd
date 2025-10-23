@@ -18,4 +18,4 @@ func dialogueViariation(randomness, dialogueKey):
 		$".".visible = false
 		choosingDialogues = true
 func _process(delta: float) -> void:
-	dialogueViariation(2,"badwords")
+	dialogueViariation(2,"GraveyardEnemyDialogue")
