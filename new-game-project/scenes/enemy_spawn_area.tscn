@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0qs3ra61yryr"]
+
+[ext_resource type="Script" uid="uid://bc6r1kvwtftp8" path="res://scripts/enemy_spawn_area.gd" id="1_q7wif"]
+
+[node name="EnemySpawnArea" type="Area2D"]
+script = ExtResource("1_q7wif")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

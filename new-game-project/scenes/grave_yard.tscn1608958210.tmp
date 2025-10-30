@@ -105,8 +105,6 @@ shape = SubResource("RectangleShape2D_uvk70")
 [node name="dialogueArea" parent="." instance=ExtResource("8_8jkj4")]
 position = Vector2(-766, 133)
 dialogue = ExtResource("9_rbprw")
-start = "start"
-alreadyPlayOnceEnable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dialogueArea"]
 position = Vector2(-93, 72)

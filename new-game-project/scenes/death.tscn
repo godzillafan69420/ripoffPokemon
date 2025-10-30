@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv1otf3jfa2j2"]
+
+[ext_resource type="FontFile" uid="uid://dffxvgjbulwpj" path="res://art/Qdbettercomicsansalternates-z8823.ttf" id="1_0hhgj"]
+[ext_resource type="Script" uid="uid://cqn1eixt02pks" path="res://scenes/death.gd" id="1_w8wr1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8wr1"]
+bg_color = Color(0.06878609, 0.019068116, 0.16031322, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.72634375, 0.8120834, 0.938983, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjai8"]
+bg_color = Color(0.7838941, 0.6365806, 0.31927818, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.93027765, 0.7349361, 0.8373592, 1)
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_w8wr1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -58.0
+offset_top = -26.0
+offset_right = 751.0
+offset_bottom = 419.0
+color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 89.0
+offset_top = 14.0
+offset_right = 744.0
+offset_bottom = 203.0
+theme_override_font_sizes/normal_font_size = 100
+text = "YOU DIED"
+
+[node name="revive" type="Button" parent="."]
+layout_mode = 0
+offset_left = 175.0
+offset_top = 216.0
+offset_right = 446.51514
+offset_bottom = 280.0
+focus_neighbor_left = NodePath("../kys")
+focus_neighbor_right = NodePath("../Button2")
+mouse_filter = 2
+theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
+theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("1_0hhgj")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_w8wr1")
+theme_override_styles/focus = SubResource("StyleBoxFlat_tjai8")
+text = "Revive"
+
+[connection signal="button_down" from="revive" to="." method="_on_revive_button_down"]

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://cjay8nxf1nbwk"
+path="res://.godot/imported/YouDied.dialogue-fdae71bbb808cb9775a4b0249a20aed1.tres"
+
+[deps]
+
+source_file="res://dialogues/YouDied.dialogue"
+dest_files=["res://.godot/imported/YouDied.dialogue-fdae71bbb808cb9775a4b0249a20aed1.tres"]
+
+[params]
+
+defaults=true
