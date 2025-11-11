@@ -8,7 +8,9 @@ var Enemies: = {
 		"Speed": 30.0,
 		"damage": 2,
 		"HP": 5,
-		"Def": 0
+		"Def": 1,
+		"XPGive": 10
+		
 	},
 	"You": {
 		"looks": preload("res://art/battlePortagonist.png"),
@@ -16,6 +18,7 @@ var Enemies: = {
 		"Speed": 60,
 		"damage": 10,
 		"HP": 30,
-		"Def": 1
+		"Def": 1,
+		"XPGive": 10
 	}
 }

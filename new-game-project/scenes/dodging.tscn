@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bneq4jfuox2l2"]
+
+[ext_resource type="Texture2D" uid="uid://boxpeiav72v41" path="res://art/Hpbar.png" id="1_gkyoo"]
+[ext_resource type="Script" uid="uid://dnnwv7f0jfhw5" path="res://scenes/dodging.gd" id="2_3w81y"]
+
+[sub_resource type="Theme" id="Theme_bek8j"]
+
+[node name="dodging" type="TextureProgressBar"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -509.0
+offset_bottom = -328.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_bek8j")
+texture_progress = ExtResource("1_gkyoo")
+tint_under = Color(0.7490196, 0.60784316, 0.18039216, 1)
+tint_over = Color(0.747938, 0.6091495, 0.18144107, 1)
+script = ExtResource("2_3w81y")

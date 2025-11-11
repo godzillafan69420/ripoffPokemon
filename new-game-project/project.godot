@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="RIpoffPokemon"
-run/main_scene="res://scenes/battle.tscn"
+run/main_scene="uid://ldqoum7tduxt"
 config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0.17738366, 0.17307618, 0.2274411, 1)
@@ -23,6 +23,10 @@ DialogList="*res://scripts/DialogList.gd"
 EnemyList="*res://scripts/EnemyList.gd"
 GlobalPlayerData="*res://scripts/GlobalPlayerData.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+
+[dialogue_manager]
+
+runtime/balloon_path="res://dialogueManager/balloon.tscn"
 
 [display]
 

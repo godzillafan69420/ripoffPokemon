@@ -1,31 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://do63bkf5ncslo"]
+[gd_scene load_steps=11 format=3 uid="uid://do63bkf5ncslo"]
 
 [ext_resource type="Script" uid="uid://cwyhnadmw1oiv" path="res://scripts/battle.gd" id="1_lpir7"]
 [ext_resource type="AudioStream" uid="uid://cmkpd4tps0m2a" path="res://music/don'tForgetToRemenber.mp3" id="2_6vh42"]
 [ext_resource type="Texture2D" uid="uid://boxpeiav72v41" path="res://art/Hpbar.png" id="3_4k1nj"]
+[ext_resource type="StyleBox" uid="uid://cby1w17si74wb" path="res://styles/UiOther.tres" id="3_f4pi3"]
 [ext_resource type="FontFile" uid="uid://dffxvgjbulwpj" path="res://art/Qdbettercomicsansalternates-z8823.ttf" id="4_f4pi3"]
+[ext_resource type="PackedScene" uid="uid://bneq4jfuox2l2" path="res://scenes/dodging.tscn" id="5_6vh42"]
+[ext_resource type="StyleBox" uid="uid://b03io1wajjj58" path="res://styles/battle.tres" id="6_yahae"]
 [ext_resource type="Texture2D" uid="uid://bmstq0qoydbo6" path="res://art/vman2.0.png" id="7_f4pi3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4k1nj"]
-bg_color = Color(0.36556464, 0.38410568, 0.60971165, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.68076926, 0.8303847, 0.8734177, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f4pi3"]
-bg_color = Color(0.22545111, 0.22172406, 0.2922582, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.8427089, 0.800019, 0.6650635, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
 bg_color = Color(0.06878609, 0.019068116, 0.16031322, 1)
@@ -61,7 +43,7 @@ offset_left = 12.0
 offset_top = 10.0
 offset_right = 201.0
 offset_bottom = 98.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_4k1nj")
+theme_override_styles/panel = ExtResource("3_f4pi3")
 
 [node name="enemyHPBar" type="TextureProgressBar" parent="UI"]
 layout_mode = 0
@@ -115,11 +97,11 @@ text = "yourMom"
 
 [node name="Panel" type="Panel" parent="UI"]
 layout_mode = 0
-offset_left = -2.0
-offset_top = 171.0
-offset_right = 642.0
-offset_bottom = 360.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_f4pi3")
+offset_left = -3.0
+offset_top = 172.0
+offset_right = 641.0
+offset_bottom = 361.0
+theme_override_styles/panel = ExtResource("6_yahae")
 
 [node name="basicMenu" type="Control" parent="UI/Panel"]
 anchors_preset = 0
@@ -220,6 +202,24 @@ offset_bottom = 184.0
 theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "HP"
 
+[node name="playerLvl" type="Label" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 169.0
+offset_top = 160.0
+offset_right = 209.0
+offset_bottom = 183.0
+theme_override_fonts/font = ExtResource("4_f4pi3")
+text = "LVl"
+
+[node name="Name" type="Label" parent="UI/Panel"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 157.0
+offset_right = 51.0
+offset_bottom = 180.0
+theme_override_fonts/font = ExtResource("4_f4pi3")
+text = "LVl"
+
 [node name="PlayerSpeed" type="Label" parent="UI/Panel"]
 layout_mode = 0
 offset_left = 473.0
@@ -228,6 +228,16 @@ offset_right = 500.0
 offset_bottom = 183.0
 theme_override_fonts/font = ExtResource("4_f4pi3")
 text = "CD"
+
+[node name="dodging" parent="UI/Panel" instance=ExtResource("5_6vh42")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="attackDirection" type="GridContainer" parent="UI/Panel"]
 visible = false
@@ -252,7 +262,7 @@ theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647,
 theme_override_fonts/font = ExtResource("4_f4pi3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
-text = "UP"
+text = "Stab"
 
 [node name="ATTACKDOWN" type="Button" parent="UI/Panel/attackDirection"]
 visible = false
@@ -265,7 +275,7 @@ theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647,
 theme_override_fonts/font = ExtResource("4_f4pi3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
-text = "DOWN"
+text = "Slash"
 
 [node name="ATTACKLEFT" type="Button" parent="UI/Panel/attackDirection"]
 visible = false
@@ -277,7 +287,7 @@ theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647,
 theme_override_fonts/font = ExtResource("4_f4pi3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
-text = "LEFT"
+text = "Kick"
 
 [node name="ATTACKRIGHT" type="Button" parent="UI/Panel/attackDirection"]
 visible = false
@@ -289,7 +299,7 @@ theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647,
 theme_override_fonts/font = ExtResource("4_f4pi3")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
-text = "RIGHT"
+text = "Dig"
 
 [node name="dodgeDirection" type="GridContainer" parent="UI/Panel"]
 visible = false
@@ -343,10 +353,10 @@ text = "RIGHT"
 
 [node name="turnIndicator" type="Label" parent="UI"]
 layout_mode = 0
-offset_left = 35.0
-offset_top = 68.0
-offset_right = 180.0
-offset_bottom = 107.0
+offset_left = 37.0
+offset_top = 101.0
+offset_right = 182.0
+offset_bottom = 140.0
 
 [node name="PlayerDamagetaken" type="Label" parent="UI"]
 layout_mode = 0
@@ -380,6 +390,15 @@ texture = ExtResource("7_f4pi3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
+[node name="dodging" parent="." instance=ExtResource("5_6vh42")]
+offset_left = 257.0
+offset_top = 87.0
+offset_right = 385.0
+offset_bottom = 119.0
+
+[node name="dodgeWindow" type="Timer" parent="dodging"]
+one_shot = true
+
 [connection signal="button_down" from="UI/Panel/basicMenu/attack" to="." method="_on_button_button_down"]
 [connection signal="button_down" from="UI/Panel/attackDirection/ATTACKUP" to="." method="_on_attackup_button_down"]
 [connection signal="button_down" from="UI/Panel/attackDirection/ATTACKDOWN" to="." method="_on_attackdown_button_down"]
@@ -391,3 +410,4 @@ texture = ExtResource("7_f4pi3")
 [connection signal="button_down" from="UI/Panel/dodgeDirection/RIGHT" to="." method="_on_right_button_down"]
 [connection signal="timeout" from="UI/PlayerDamagetaken/DamageIndicatorCD" to="." method="_on_damage_indicator_cd_timeout"]
 [connection signal="timeout" from="UI/enemyDamagetaken/DamageIndicatorCD" to="." method="_on_damage_indicator_cd_timeout"]
+[connection signal="timeout" from="dodging/dodgeWindow" to="." method="_on_dodge_window_timeout"]
