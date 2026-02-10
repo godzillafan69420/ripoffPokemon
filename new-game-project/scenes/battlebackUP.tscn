@@ -1,13 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://do63bkf5ncslo"]
+[gd_scene load_steps=11 format=3 uid="uid://bxsjijlhmdjpx"]
 
-[ext_resource type="Script" uid="uid://cwyhnadmw1oiv" path="res://scripts/battle.gd" id="1_lpir7"]
-[ext_resource type="AudioStream" uid="uid://cmkpd4tps0m2a" path="res://music/don'tForgetToRemenber.mp3" id="2_6vh42"]
-[ext_resource type="Texture2D" uid="uid://boxpeiav72v41" path="res://art/Hpbar.png" id="3_4k1nj"]
-[ext_resource type="StyleBox" uid="uid://cby1w17si74wb" path="res://styles/UiOther.tres" id="3_f4pi3"]
-[ext_resource type="FontFile" uid="uid://dffxvgjbulwpj" path="res://art/Qdbettercomicsansalternates-z8823.ttf" id="4_f4pi3"]
-[ext_resource type="PackedScene" uid="uid://bneq4jfuox2l2" path="res://scenes/dodging.tscn" id="5_6vh42"]
-[ext_resource type="StyleBox" uid="uid://b03io1wajjj58" path="res://styles/battle.tres" id="6_yahae"]
-[ext_resource type="Texture2D" uid="uid://bmstq0qoydbo6" path="res://art/vman2.0.png" id="7_f4pi3"]
+[ext_resource type="Script" uid="uid://cwyhnadmw1oiv" path="res://scripts/battle.gd" id="1_g2u07"]
+[ext_resource type="AudioStream" uid="uid://cmkpd4tps0m2a" path="res://music/don'tForgetToRemenber.mp3" id="2_xspnh"]
+[ext_resource type="StyleBox" uid="uid://cby1w17si74wb" path="res://styles/UiOther.tres" id="3_kiivo"]
+[ext_resource type="Texture2D" uid="uid://boxpeiav72v41" path="res://art/Hpbar.png" id="4_okkci"]
+[ext_resource type="FontFile" uid="uid://dffxvgjbulwpj" path="res://art/Qdbettercomicsansalternates-z8823.ttf" id="5_fd6of"]
+[ext_resource type="StyleBox" uid="uid://b03io1wajjj58" path="res://styles/battle.tres" id="6_5hjgk"]
+[ext_resource type="PackedScene" uid="uid://bneq4jfuox2l2" path="res://scenes/dodging.tscn" id="7_mejdu"]
+[ext_resource type="Texture2D" uid="uid://bmstq0qoydbo6" path="res://art/vman2.0.png" id="8_l2532"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lpir7"]
 bg_color = Color(0.06878609, 0.019068116, 0.16031322, 1)
@@ -26,10 +26,10 @@ border_width_bottom = 4
 border_color = Color(0.93027765, 0.7349361, 0.8373592, 1)
 
 [node name="battle" type="Node2D"]
-script = ExtResource("1_lpir7")
+script = ExtResource("1_g2u07")
 
 [node name="Don\'tForgetToRemenber" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_6vh42")
+stream = ExtResource("2_xspnh")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -43,7 +43,7 @@ offset_left = 12.0
 offset_top = 10.0
 offset_right = 201.0
 offset_bottom = 98.0
-theme_override_styles/panel = ExtResource("3_f4pi3")
+theme_override_styles/panel = ExtResource("3_kiivo")
 
 [node name="enemyHPBar" type="TextureProgressBar" parent="UI"]
 layout_mode = 0
@@ -54,7 +54,7 @@ offset_bottom = 60.0
 max_value = 20.0
 value = 20.0
 rounded = true
-texture_progress = ExtResource("3_4k1nj")
+texture_progress = ExtResource("4_okkci")
 
 [node name="enemyChargeBar" type="TextureProgressBar" parent="UI"]
 layout_mode = 0
@@ -64,7 +64,7 @@ offset_right = 170.0
 offset_bottom = 94.0
 value = 20.0
 rounded = true
-texture_progress = ExtResource("3_4k1nj")
+texture_progress = ExtResource("4_okkci")
 tint_over = Color(0.9796547, 0.74454045, 0.9658639, 1)
 tint_progress = Color(0.42181668, 0.6514035, 0.85754997, 1)
 
@@ -74,7 +74,7 @@ offset_left = 17.0
 offset_top = 36.0
 offset_right = 57.0
 offset_bottom = 59.0
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 text = "HP"
 
 [node name="EnemycooldownLabel" type="Label" parent="UI"]
@@ -83,7 +83,7 @@ offset_left = 16.0
 offset_top = 68.0
 offset_right = 56.0
 offset_bottom = 91.0
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 text = "CD"
 
 [node name="EnemyName" type="Label" parent="UI"]
@@ -92,7 +92,7 @@ offset_left = 44.0
 offset_top = 7.0
 offset_right = 106.0
 offset_bottom = 30.0
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 text = "yourMom"
 
 [node name="Panel" type="Panel" parent="UI"]
@@ -101,7 +101,7 @@ offset_left = -3.0
 offset_top = 172.0
 offset_right = 641.0
 offset_bottom = 361.0
-theme_override_styles/panel = ExtResource("6_yahae")
+theme_override_styles/panel = ExtResource("6_5hjgk")
 
 [node name="basicMenu" type="Control" parent="UI/Panel"]
 anchors_preset = 0
@@ -118,7 +118,7 @@ focus_neighbor_left = NodePath("../kys")
 focus_neighbor_right = NodePath("../Button2")
 theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
 theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
 text = "attack"
@@ -134,7 +134,7 @@ focus_neighbor_right = NodePath("../Button3")
 mouse_filter = 2
 theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
 theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
 text = "fart"
@@ -149,7 +149,7 @@ focus_neighbor_left = NodePath("../Button2")
 focus_neighbor_right = NodePath("../kys")
 theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
 theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
 button_mask = 0
@@ -165,7 +165,7 @@ focus_neighbor_left = NodePath("../Button3")
 focus_neighbor_right = NodePath("../attack")
 theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
 theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
 text = "kys"
@@ -179,7 +179,7 @@ offset_bottom = 186.0
 max_value = 20.0
 value = 20.0
 rounded = true
-texture_progress = ExtResource("3_4k1nj")
+texture_progress = ExtResource("4_okkci")
 
 [node name="playerChargeBar" type="TextureProgressBar" parent="UI/Panel"]
 layout_mode = 0
@@ -189,7 +189,7 @@ offset_right = 632.0
 offset_bottom = 187.0
 value = 20.0
 rounded = true
-texture_progress = ExtResource("3_4k1nj")
+texture_progress = ExtResource("4_okkci")
 tint_over = Color(0.9796547, 0.74454045, 0.9658639, 1)
 tint_progress = Color(0.42181668, 0.6514035, 0.85754997, 1)
 
@@ -199,7 +199,7 @@ offset_left = 281.0
 offset_top = 161.0
 offset_right = 321.0
 offset_bottom = 184.0
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 text = "HP"
 
 [node name="playerLvl" type="Label" parent="UI/Panel"]
@@ -208,7 +208,7 @@ offset_left = 169.0
 offset_top = 160.0
 offset_right = 209.0
 offset_bottom = 183.0
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 text = "LVl"
 
 [node name="Name" type="Label" parent="UI/Panel"]
@@ -217,7 +217,7 @@ offset_left = 11.0
 offset_top = 157.0
 offset_right = 51.0
 offset_bottom = 180.0
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 text = "LVl"
 
 [node name="PlayerSpeed" type="Label" parent="UI/Panel"]
@@ -226,10 +226,10 @@ offset_left = 473.0
 offset_top = 160.0
 offset_right = 500.0
 offset_bottom = 183.0
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 text = "CD"
 
-[node name="dodging" parent="UI/Panel" instance=ExtResource("5_6vh42")]
+[node name="dodging" parent="UI/Panel" instance=ExtResource("7_mejdu")]
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
@@ -259,7 +259,7 @@ theme_override_colors/font_focus_color = Color(0.62049127, 0.80807, 0.89585024, 
 theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
 theme_override_colors/icon_focus_color = Color(0.12893206, 0.30376804, 0.41363913, 1)
 theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
 text = "Stab"
@@ -272,7 +272,7 @@ focus_neighbor_bottom = NodePath("../ATTACKRIGHT")
 theme_override_colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
 theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
 theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
 text = "Slash"
@@ -284,7 +284,7 @@ focus_neighbor_top = NodePath("../ATTACKUP")
 focus_neighbor_right = NodePath("../ATTACKRIGHT")
 theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
 theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
 text = "Kick"
@@ -296,10 +296,60 @@ focus_neighbor_left = NodePath("../ATTACKLEFT")
 focus_neighbor_top = NodePath("../ATTACKDOWN")
 theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
 theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
 theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
 text = "Slam"
+
+[node name="dodgeDirection" type="GridContainer" parent="UI/Panel"]
+visible = false
+layout_mode = 0
+offset_left = 167.0
+offset_top = 3.0
+offset_right = 275.0
+offset_bottom = 61.0
+scale = Vector2(2.9433963, 1.9069767)
+columns = 2
+
+[node name="UP" type="Button" parent="UI/Panel/dodgeDirection"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
+theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("5_fd6of")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
+text = "UP"
+
+[node name="DOWN" type="Button" parent="UI/Panel/dodgeDirection"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
+theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("5_fd6of")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
+text = "DOWN"
+
+[node name="LEFT" type="Button" parent="UI/Panel/dodgeDirection"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
+theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("5_fd6of")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
+text = "LEFT"
+
+[node name="RIGHT" type="Button" parent="UI/Panel/dodgeDirection"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.61960787, 0.80784315, 0.89411765, 1)
+theme_override_colors/icon_hover_color = Color(0.12941177, 0.3019608, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("5_fd6of")
+theme_override_styles/normal = SubResource("StyleBoxFlat_lpir7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_6vh42")
+text = "RIGHT"
 
 [node name="turnIndicator" type="Label" parent="UI"]
 layout_mode = 0
@@ -316,7 +366,7 @@ offset_right = 428.0
 offset_bottom = 76.0
 scale = Vector2(2.24, 2.04)
 theme_override_colors/font_color = Color(0.89573556, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 
 [node name="DamageIndicatorCD" type="Timer" parent="UI/PlayerDamagetaken"]
 one_shot = true
@@ -329,18 +379,18 @@ offset_right = 392.34235
 offset_bottom = 130.09247
 scale = Vector2(3.6264174, 2.6188345)
 theme_override_colors/font_color = Color(0.3038669, 0.38479647, 1, 1)
-theme_override_fonts/font = ExtResource("4_f4pi3")
+theme_override_fonts/font = ExtResource("5_fd6of")
 
 [node name="DamageIndicatorCD" type="Timer" parent="UI/enemyDamagetaken"]
 one_shot = true
 
 [node name="enemy" type="Sprite2D" parent="."]
 position = Vector2(320, 98)
-texture = ExtResource("7_f4pi3")
+texture = ExtResource("8_l2532")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="dodging" parent="." instance=ExtResource("5_6vh42")]
+[node name="dodging" parent="." instance=ExtResource("7_mejdu")]
 offset_left = 257.0
 offset_top = 87.0
 offset_right = 385.0
@@ -354,6 +404,10 @@ one_shot = true
 [connection signal="button_down" from="UI/Panel/attackDirection/ATTACKDOWN" to="." method="_on_attackdown_button_down"]
 [connection signal="button_down" from="UI/Panel/attackDirection/ATTACKLEFT" to="." method="_on_attackleft_button_down"]
 [connection signal="button_down" from="UI/Panel/attackDirection/ATTACKRIGHT" to="." method="_on_attackright_button_down"]
+[connection signal="button_down" from="UI/Panel/dodgeDirection/UP" to="." method="_on_up_button_down"]
+[connection signal="button_down" from="UI/Panel/dodgeDirection/DOWN" to="." method="_on_down_button_down"]
+[connection signal="button_down" from="UI/Panel/dodgeDirection/LEFT" to="." method="_on_left_button_down"]
+[connection signal="button_down" from="UI/Panel/dodgeDirection/RIGHT" to="." method="_on_right_button_down"]
 [connection signal="timeout" from="UI/PlayerDamagetaken/DamageIndicatorCD" to="." method="_on_damage_indicator_cd_timeout"]
 [connection signal="timeout" from="UI/enemyDamagetaken/DamageIndicatorCD" to="." method="_on_damage_indicator_cd_timeout"]
 [connection signal="timeout" from="dodging/dodgeWindow" to="." method="_on_dodge_window_timeout"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cttjfmajwujvn"]
+
+[ext_resource type="PackedScene" uid="uid://c4n74b5nvdnwu" path="res://scenes/playerBulletHell.tscn" id="1_03gq5"]
+
+[node name="bullethell" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 160.0
+offset_top = 120.0
+offset_right = 480.0
+offset_bottom = 304.0
+color = Color(0.19793725, 0.19793722, 0.19793722, 1)
+
+[node name="player" parent="." instance=ExtResource("1_03gq5")]
+position = Vector2(320, 252)
